@@ -65,10 +65,23 @@ psql -U postgres -d alx_airbnb_db
 **Edmond Kipruto**
 GitHub: [@ekipruto](https://github.com/ekipruto)
 
----
+--1. Practice Subqueries
 
-*This marks completion of Task 0 — onward to the next challenge!*
+database-adv-script/subqueries.sql
+Advanced Querying: Subqueries
+This file contains two complex SQL queries designed to demonstrate mastery of subqueries, including both non-correlated and correlated types, as part of the ALX AirBnB Database project.
+1. Non-Correlated Subquery: Property Rating Filter
+Objective: Retrieve all properties that have a high average rating.
+Table(s) Used	Join Type	Key Concept
+"Property", "Review"	IN clause	The inner subquery executes once to find a list of property_ids before the outer query runs.
+Goal: Find properties where the average rating (AVG(rating) from the "Review" table) is strictly greater than 4.0.
+2. Correlated Subquery: High-Volume Users
+Objective: Identify users who are frequent bookers on the platform.
+Table(s) Used	Join Type	Key Concept
+"User", "Booking"	WHERE clause (Correlated)	The inner subquery executes once for every row in the outer query, using the user_id to link the count back to the specific user being evaluated.
+Goal: Find users who have made more than 3 bookings by counting associated records in the "Booking" table.
+Prerequisites
+•	A running PostgreSQL database instance.
+•	The AirBnB schema (defined in your schema.sql) must be deployed.
+•	Sufficient sample data must be populated in the "User", "Property", "Booking", and "Review" tables to ensure the queries return accurate results.
 
----
-
-If you'd like, I can add screenshots, output results, or verification SQL as a separate section.
