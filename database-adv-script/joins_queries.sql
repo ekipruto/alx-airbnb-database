@@ -1,46 +1,71 @@
--- Query 1: INNER JOIN - Bookings with Users
--- Requirement: Retrieve all bookings and the respective users who made those bookings
--- SQL Query:
-select 
-b.booking_id,
-b.start_date,
-b.end_date,
-b.total_price,
-b.status,
-u.user_id,
-u.first_name ||''|| u.last_name AS "Guest Name",
-u.email
-from "Booking" b
-INNER JOIN "User" u on b.user_id=u.user_id;
+-- TASK 0: COMPLEX QUERIES WITH JOINS
+-- File: joins_queries.sql
+-- Purpose: Demonstrate INNER JOIN, LEFT JOIN, and FULL OUTER JOIN
+-- Database: alx_airbnb_db
+-- NOTE: Use this version if your tables are created with quotes ("User", "Booking", etc.)
+-- QUERY 1: INNER JOIN
+-- Retrieve all bookings and the respective users who made those bookings
 
--- a query using aLEFT JOIN to retrieve all properties and their reviews, including properties 
--- that have no reviews.
--- select
-p.property_id,
-p.name as property_name,
-p.location,
-p.pricepernight,
-r.review_id,
-r.rating,
-r.comment,
-u.first_name || ''|| u.last_name as "Reviewer Name"
-from "Property" p
-left join "Review" r on p.property_id=r.property_id
-left join "User" u on r.user_id=u.user_id;
+SELECT 
+    "Booking".booking_id,
+    "Booking".property_id,
+    "Booking".user_id,
+    "Booking".start_date,
+    "Booking".end_date,
+    "Booking".total_price,
+    "Booking".status,
+    "User".user_id AS booking_user_id,
+    "User".first_name,
+    "User".last_name,
+    "User".email,
+    "User".phone_number,
+    "User".role
+FROM 
+    "Booking"
+INNER JOIN 
+    "User" ON "Booking".user_id = "User".user_id;
 
--- Query 3: FULL OUTER JOIN - Users and Bookings
--- Requirement: Retrieve all users and all bookings, even if the user has no booking or a 
--- booking is not linked to a user
-select 
-u.user_id,
-u.first_name,
-u.last_name,
-u.role,
-u.email,
-b.booking_id,
-b.start_date,
-b.end_date,
-total_price,
-b.status
-from "User" u
-FULL OUTER JOIN "Booking"b on u.user_id=b.user_id;
+-- QUERY 2: LEFT JOIN
+-- Retrieve all properties and their reviews, including properties that have no reviews
+
+SELECT 
+    "Property".property_id,
+    "Property".host_id,
+    "Property".name,
+    "Property".description,
+    "Property".location,
+    "Property".pricepernight,
+    "Review".review_id,
+    "Review".property_id AS review_property_id,
+    "Review".user_id AS reviewer_id,
+    "Review".rating,
+    "Review".comment,
+    "Review".created_at AS review_date
+FROM 
+    "Property"
+LEFT JOIN 
+    "Review" ON "Property".property_id = "Review".property_id;
+
+
+-- QUERY 3: FULL OUTER JOIN
+-- Retrieve all users and all bookings, even if the user has no booking 
+-- or a booking is not linked to a user
+
+SELECT 
+    "User".user_id,
+    "User".first_name,
+    "User".last_name,
+    "User".email,
+    "User".phone_number,
+    "User".role,
+    "Booking".booking_id,
+    "Booking".property_id,
+    "Booking".user_id AS booking_user_id,
+    "Booking".start_date,
+    "Booking".end_date,
+    "Booking".total_price,
+    "Booking".status
+FROM 
+    "User"
+FULL OUTER JOIN 
+    "Booking" ON "User".user_id = "Booking".user_id;
