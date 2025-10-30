@@ -1,4 +1,5 @@
--- Query 1: Find all properties where the average rating is greater than 4.0 using a non-correlated subquery.
+-- Query 1: Find all properties where the average rating is greater than 4.0 using a non-correlated 
+-- subquery.
 SELECT
     p.property_id,
     p.name,
