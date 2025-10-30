@@ -15,7 +15,7 @@ GROUP BY
 ORDER BY
     total_bookings_made DESC;
 
-    -- Query 2: Use a window function (RANK) to rank properties
+-- Query 2: Use a window function (RANK) to rank properties
 -- based on the total number of bookings they have received.
 WITH PropertyBookings AS (
     -- Step 1: Calculate total bookings per property
@@ -35,8 +35,8 @@ SELECT
     name,
     booking_count,
     -- Step 2: Apply the window function (RANK)
-    RANK() OVER (ORDER BY booking_count DESC) AS booking_rank
+    ROW_NUMBER() OVER (ORDER BY booking_count DESC) AS booking_rank_number
 FROM
     PropertyBookings
 ORDER BY
-    booking_rank, booking_count DESC;
+    booking_rank_number;
