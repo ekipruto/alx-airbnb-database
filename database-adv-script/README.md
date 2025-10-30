@@ -85,3 +85,8 @@ Prerequisites
 •	The AirBnB schema (defined in your schema.sql) must be deployed.
 •	Sufficient sample data must be populated in the "User", "Property", "Booking", and "Review" tables to ensure the queries return accurate results.
 
+2. Apply Aggregations and Window Functions
+
+1. Data Aggregation: Bookings Per UserObjective: Use standard SQL aggregation to summarize user activity.FunctionClausePurposeCOUNT()GROUP BYCalculate the total number of bookings associated with each unique user_id.LEFT JOINEnsure all users are included, even those with zero bookings.
+
+2. Window Function: Property RankingObjective: Use a window function to rank properties based on a calculated metric without collapsing the result set.Window FunctionPartition/OrderMetricRANK()ORDER BY booking_count DESCAssigns a rank to each property based on the number of bookings received. Tied properties receive the same rank, and the next rank is skipped.
